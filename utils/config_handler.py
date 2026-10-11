@@ -19,7 +19,12 @@ def load_agent_config(config_path:str = get_abs_path("config/agent.yml"), encodi
     with open(config_path,"r",encoding=encoding) as f:
         return yaml.load(f, Loader=yaml.FullLoader)
 
+def load_intent_config(config_path:str = get_abs_path("config/intent.yml"), encoding:str = "utf-8"):
+    with open(config_path,"r",encoding=encoding) as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
+
 rag_config=load_rag_config()
 chroma_config=load_chroma_config()
 prompts_config=load_prompts_config()
 agent_config=load_agent_config()
+intent_config=load_intent_config()

@@ -1,6 +1,7 @@
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from model.factory import embedding_model
+import chromadb
 from langchain_chroma import Chroma
 from utils.config_handler import chroma_config
 import os
@@ -14,7 +15,7 @@ class VectorStoreService:
         self.vector_store = Chroma(
             collection_name=chroma_config["collection_name"],
             embedding_function=embedding_model,
-            persist_directory=get_abs_path(chroma_config["persist_directory"]),
+            client=chromadb.HttpClient(host=chroma_config["host"], port=chroma_config["port"]),
         )
 
         self.spliter = RecursiveCharacterTextSplitter(
